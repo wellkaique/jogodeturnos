@@ -1,1 +1,33 @@
-<p>game works!</p>
+<div class="game-container">
+  <h2>Jogo de Turnos</h2>
+
+  <div class="players">
+    <div>
+      <h3>Jogador</h3>
+      <div class="health-bar" [ngStyle]="{ 'width': playerHealth + '%' }"></div>
+      <p>{{ playerHealth }} / 100</p>
+    </div>
+
+    <div>
+      <h3>Inimigo</h3>
+      <div class="health-bar enemy" [ngStyle]="{ 'width': enemyHealth + '%' }"></div>
+      <p>{{ enemyHealth }} / 100</p>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button (click)="attack()" [disabled]="gameOver">Ataque Básico</button>
+    <button (click)="specialAttack()" [disabled]="specialCooldown > 0 || gameOver">
+      Ataque Especial ({{ specialCooldown > 0 ? specialCooldown : 'Pronto' }})
+    </button>
+    <button (click)="heal()" [disabled]="gameOver">Curar</button>
+    <button (click)="giveUp()">Desistir</button>
+  </div>
+
+  <div class="log">
+    <h4>Log de Ações</h4>
+    <ul>
+      <li @for="let entry of logs"></li>
+    </ul>
+  </div>
+</div>
